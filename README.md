@@ -161,13 +161,12 @@ python Main.py --dataset_name "CICIDS2017" --acceptance_err 0.07 --train_mode "p
 
 # Citation
 ```
-@inproceedings{alotaibi24rasd,
-  title={Rasd: Semantic Shift Detection and Adaptation for Network Intrusion Detection},
+@inproceedings{alotaibi24mateen,
+  title={Mateen: Adaptive Ensemble Learning for Network Anomaly Detection},
   author={Alotaibi, Fahad and Maffeis, Sergio},
-  booktitle={the 39th International Conference on ICT Systems Security and Privacy Protection (SEC 2024)},
-  pages={14},
+  booktitle={the 27th International Symposium on Research in Attacks, Intrusions and Defenses (RAID 2024)},
   year={2024},
-  organization={Springer}
+  organization={Association for Computing Machinery}
 }
 
 ```
