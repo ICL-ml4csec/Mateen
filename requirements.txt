@@ -1,0 +1,6 @@
+torch==2.0.1
+numpy==1.25.0
+pandas==1.5.3
+scipy==1.10.1
+sklearn==1.2.2
+tqdm==4.65.0
