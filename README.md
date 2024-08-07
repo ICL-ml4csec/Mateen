@@ -1,18 +1,26 @@
-# Rasd
+# Mateen
 
 <p align="center">
     <img width="600" src="https://github.com/ICL-ml4csec/Rasd/assets/62217808/6cdd4536-7461-402f-874c-a788efba0f8f" alt="Rasd">
 </p>
 
 # Overview
-Rasd is a framework designed for semantic shift detection and adaptation in learning-based multi-class network intrusion detection systems. It comprises two main components:
+Mateen is a framework designed to enhance AutoEncoder (AE)-based one-class network intrusion detection systems by effectively managing distribution shifts in network traffic. It comprises four key components:
 
 ### Shift Detection Function
-  - Utilizes a centroid-based loss function to detect shifts.
+  - Functionality: Uses statistical methods to detect shifts in the distribution of network traffic data.
   
+### Sample Selection
+  - Subset Selection: Identifies a representative subset of the network traffic samples that reflects the overall distribution after a shift.
+  - Labeling and Update Decision: The subset is manually labeled to decide whether an update to the model is necessary.
+
 ### Shift Adaptation Module
-  - Selects a representative subset of detected shift samples, approximating the entire distribution.
-  - Manually labels this subset to train a Pseudo-Labeler, which is then used to pseudo-label the remaining unselected samples. 
+  - Incremental Model Update: Integrates the benign data of the labeled subset with the existing training set. Then, updates the incremental model on this expanded set. 
+  - Temporary Model Training: Initiates a new temporary model with the same weights as the incremental model. Then, train this model exclusively on the benign data of the labeled subset.
+    
+### Complexity Reduction Module
+  - Model Merging: Combines temporary models with similar performance.
+  - Model Pruning: Discards underperforming models.
 
 For further details, please refer to the main paper.
 
@@ -29,8 +37,6 @@ numpy==1.25.0
 pandas==1.5.3
 scipy==1.10.1
 sklearn==1.2.2
-deap==1.4
-optuna==3.2.0
 tqdm==4.65.0
 ```
 
