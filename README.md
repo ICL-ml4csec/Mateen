@@ -5,27 +5,27 @@
 </p>
 
 # Overview
-Mateen is a framework designed to enhance AutoEncoder (AE)-based one-class network intrusion detection systems by effectively managing distribution shifts in network traffic. It comprises four key components:
+Mateen is an ensemble framework designed to enhance AutoEncoder (AE)-based one-class network intrusion detection systems by effectively managing distribution shifts in network traffic. It comprises four key components:
 
 ### Shift Detection Function
-  - Functionality: Uses statistical methods to detect shifts in the distribution of network traffic data.
+  - **Functionality**: Uses statistical methods to detect shifts in the distribution of network traffic data.
   
 ### Sample Selection
-  - Subset Selection: Identifies a representative subset of the network traffic samples that reflects the overall distribution after a shift.
-  - Labeling and Update Decision: The subset is manually labeled to decide whether an update to the model is necessary.
+  - **Subset Selection**: Identifies a representative subset of the network traffic samples that reflects the overall distribution after a shift.
+  - **Labeling and Update Decision**: The subset is manually labeled to decide whether an update to the ensemble is necessary.
 
 ### Shift Adaptation Module
-  - Incremental Model Update: Integrates the benign data of the labeled subset with the existing training set. Then, updates the incremental model on this expanded set. 
-  - Temporary Model Training: Initiates a new temporary model with the same weights as the incremental model. Then, train this model exclusively on the benign data of the labeled subset.
+  - **Incremental Model Update**: Integrates the benign data of the labeled subset with the existing training set. Then, updates the incremental model on this expanded set. 
+  - **Temporary Model Training**: Initiates a new temporary model with the same weights as the incremental model. Then, train this model exclusively on the benign data of the labeled subset.
     
 ### Complexity Reduction Module
-  - Model Merging: Combines temporary models with similar performance.
-  - Model Pruning: Discards underperforming models.
+  - **Model Merging**: Combines temporary models with similar performance.
+  - **Model Pruning**: Discards underperforming models.
 
 For further details, please refer to the main paper.
 
 # Pre-requisites and requirements
-Before running Rasd, ensure you have the necessary dependencies installed. These dependencies are listed in the '<b>requirements.txt</b>' file. You can install them using the following command:
+Before running Mateen, ensure you have the necessary dependencies installed. These dependencies are listed in the '<b>requirements.txt</b>' file. You can install them using the following command:
 ```bash
 pip install -r requirements.txt
 ```
@@ -42,34 +42,36 @@ tqdm==4.65.0
 
 
 # Models and Data 
-You can download the pre-trained models and the processed data from the following link: 
-<p align="center"> <a href="https://drive.google.com/drive/folders/1Cj6EhC9ydGhkg6wcBgpfqFSLvLLRuSqG?usp=sharing" target="_blank">Google Drive Folder</a> </p>
+You can download the pre-trained models, the processed data, as well as the results CSV files from the following link: 
+<p align="center"> <a href="https://drive.google.com/drive/folders/1PG_tPCxmS2rdkIMokjBnQkXhIJgJJlEY?usp=drive_link" target="_blank">Google Drive Folder</a> </p>
 
-The contents of the download are as follows: 
-- `RasdData.zip`: Contains the processed data.
-- `RasdModels.zip`: Contains the pre-trained models.
+The contents of the folder are as follows: 
+- `Datasets.zip`: Contains the processed data.
+- `Models.zip`: Contains the pre-trained models.
+- `Results.zip`: Contains prediction results and probability scores from the Mateen framework across the datasets
 
-Download and extract these files into the main directory of Rasd (i.e., `Rasd/`). This will ensure that the data and models are properly organized and ready for use.
+Download and extract these files into the main directory of Mateen (i.e., `Mateen/`). This will ensure that the data and models are properly organized and ready for use.
  
-# How to Use Rasd
+# How to Use Mateen
 
-To utilize Rasd with our settings, please follow these steps to set up the required datasets and run the framework.
+To utilize Mateen with our settings, please follow these steps to set up the required datasets and run the framework.
 
 ## Dataset Setup
 
-First, download the datasets as mentioned in the [Models and Data](https://github.com/ICL-ml4csec/Rasd/edit/main/README.md#models-and-data) section. Ensure that the files are organized in the following directories:
+First, download the datasets as mentioned in the [Models and Data](https://github.com/ICL-ml4csec/Mateen/edit/main/README.md#models-and-data) section. Ensure that the files are organized in the following directories:
 
-- `data/CICIDS2017/` for IDS2017
-- `data/CICIDS2018/` for IDS2018
+- `Datasets/CICIDS2017/` for IDS2017
+- `Datasets/IDS2018/` for IDS2018
+- `Datasets/Kitsune/` for Kitsune and its variants. 
 
-You can directly download and unzip the datasets into the main directory of Rasd (i.e., `Rasd/`).
+You can directly download and unzip the datasets into the main directory of Mateen (i.e., `Mateen/`).
 
-## Running Rasd
+## Running Mateen
 
-To run Rasd, use the following command:
+To run Mateen, use the following command:
 
 ```bash
-python Main.py
+python Mateen.py
 ```
 ## Command-Line Options 
 You can customize the execution using various command-line options:
@@ -79,47 +81,59 @@ Switch between datasets using the '<b>--dataset_name</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "CICIDS2017"
+python Main.py --dataset_name "IDS2017"
 ```
 <details>
   <summary>Options</summary>
-   "CICIDS2017" and "CICIDS2018"
+   "IDS2017", "IDS2018", "Kitsune", "mKitsune", and "rKitsune"
 </details>
 
-### Detection Threshold
-Set the detection thresholds using the '<b>--acceptance_err</b>' option.
+### Window Size
+Set the window size using the '<b>--window_size</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "CICIDS2017" --acceptance_err 0.07
+python Main.py --dataset_name "IDS2017" --window_size 50000
 ```
 <details>
 <summary>Options</summary>
-0.01, 0.02, 0.03, 0.04, 0.05, 0.06,  0.07, 0.08,  0.09, and  0.1
+10000, 50000, and 100000
 </details>
 
-### Training Mode
-Use pre-trained models or train new models using the '<b>--train_mode</b>' option.
+### Performance Threshold
+The minimum acceptable performance '<b>--performance_thres</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "CICIDS2017" --acceptance_err 0.07 --train_mode "pre-train"
+python Main.py --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99
 ```
 <details>
   <summary>Options</summary>
-    "pre-train" and "train-new"
+    0.99, 0.95, 0.90, 0.85, and 0.8
 </details>
 
-### Mode of Operation
-Select the operation mode (detection only or detection & adaptation) using the '<b>--Mode</b>' option. 
+### Maximum Ensemble Size
+The maximum acceptable ensemble size '<b>--max_ensemble_length</b>' option. 
 
 Example:
 ```bash
-python Main.py --dataset_name "CICIDS2017" --acceptance_err 0.07 --train_mode "pre-train" --Mode "Detection"
+python Main.py --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3
 ```
 <details>
     <summary>Options</summary>
-    "Detection" and "Both"
+    3, 5, and 7
+</details>
+
+### Selection Rate
+Set the selection rate for building a subset for manual labeling using the '<b>--selection_budget</b>' option.
+
+Example:
+```bash
+python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01
+```
+<details>
+    <summary>Options</summary>
+   0.005, 0.01, 0.05, and 0.1
 </details>
 
 ### Detection Method
@@ -134,17 +148,7 @@ python Main.py --dataset_name "CICIDS2017" --acceptance_err 0.07 --train_mode "p
     "Rasd", "LSL", and "CADE"
 </details>
 
-### Selection Rate
-Set the selection rate for building a subset for manual labeling using the '<b>--selection_rate</b>' option.
 
-Example:
-```bash
-python Main.py --dataset_name "CICIDS2017" --acceptance_err 0.07 --train_mode "pre-train" --Mode "Detection" --Detection_Method "Rasd" --selection_rate 0.05
-```
-<details>
-    <summary>Options</summary>
-    0.01, 0.02, 0.03, 0.04, and 0.05
-</details>
 
 ### Selection Batch Size
 Set the batch size for splitting the pool of detected samples using the '<b>--selection_batch_size</b>' option.
