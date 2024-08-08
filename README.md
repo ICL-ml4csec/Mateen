@@ -1,8 +1,7 @@
 # Mateen
 
-<p align="center">
-    <img width="600" src="https://github.com/ICL-ml4csec/Rasd/assets/62217808/6cdd4536-7461-402f-874c-a788efba0f8f" alt="Rasd">
-</p>
+<img width="587" alt="mtn" src="https://github.com/user-attachments/assets/63a75b73-840d-4d62-8bed-34c157b869de">
+
 
 # Overview
 Mateen is an ensemble framework designed to enhance AutoEncoder (AE)-based one-class network intrusion detection systems by effectively managing distribution shifts in network traffic. It comprises four key components:
@@ -100,12 +99,25 @@ python Main.py --dataset_name "IDS2017" --window_size 50000
 10000, 50000, and 100000
 </details>
 
+### Shift Detection Threshold
+Set the threshold using '<b>--shift_threshold</b>' option.
+
+Example:
+```bash
+python Main.py  --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05
+```
+
+<details>
+    <summary>Options</summary>
+    0.05, 0.1, and 0.2
+</details>
+
 ### Performance Threshold
 The minimum acceptable performance '<b>--performance_thres</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99
+python Main.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99
 ```
 <details>
   <summary>Options</summary>
@@ -117,7 +129,7 @@ The maximum acceptable ensemble size '<b>--max_ensemble_length</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3
+python Main.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3
 ```
 <details>
     <summary>Options</summary>
@@ -129,7 +141,7 @@ Set the selection rate for building a subset for manual labeling using the '<b>-
 
 Example:
 ```bash
-python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01
+python Main.py  --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01
 ```
 <details>
     <summary>Options</summary>
@@ -141,7 +153,7 @@ Choose the min-batch size using the '<b>--mini_batch_size</b>' option.
 
 Example:
 ```bash
-python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000
+python Main.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000
 ```
 <details>
     <summary>Options</summary>
@@ -149,13 +161,12 @@ python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres
 </details>
 
 
-
 ### Retention Rate
 Set the value of the retention rate using '<b>--retention_rate</b>' option.
 
 Example:
 ```bash
-python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3
+python Main.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3
 ```
 <details>
     <summary>Options</summary>
@@ -163,32 +174,20 @@ python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres
 </details>
 
 ### Lambda 0 value
-Set the value of the lambda 0 using '<b>--lambda_0</b>' option.
+Adjust the lambda_0 parameter with the '<b>--lambda_0'</b> option to adjust the weight assigned to uniqueness scores during the sample selection process.
 
 Example:
 ```bash
-python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3 --lambda_0 0.1
+python Main.py  --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3 --lambda_0 0.1
 ```
 <details>
     <summary>Options</summary>
     0.1, 0.5, and 1.0
 </details>
 
-### Shift Detection Threshold
-Set the threshold using '<b>--shift_threshold</b>' option.
 
-Example:
-```bash
-python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3 --lambda_0 0.1 --shift_threshold 0.05
-```
-
-<details>
-    <summary>Options</summary>
-    0.05, 0.1, and 0.2
-</details>
-
-# Hyperparameter Selection
-For further customization options and detailed hyperparameter selection, please refer to the main paper, Appendix C.
+## Hyperparameter Selection
+For further details about the hyperparameter selection, please refer to the main paper, Appendix C.
 
 # Citation
 ```
