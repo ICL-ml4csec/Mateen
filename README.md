@@ -1,6 +1,7 @@
-# Mateen
 
-<img width="587" alt="mtn" src="https://github.com/user-attachments/assets/63a75b73-840d-4d62-8bed-34c157b869de">
+<p align="center">
+  <img width="587" alt="mtn" src="https://github.com/user-attachments/assets/63a75b73-840d-4d62-8bed-34c157b869de">
+</p>
 
 
 # Overview
