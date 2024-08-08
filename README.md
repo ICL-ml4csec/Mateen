@@ -8,7 +8,7 @@
 Mateen is an ensemble framework designed to enhance AutoEncoder (AE)-based one-class network intrusion detection systems by effectively managing distribution shifts in network traffic. It comprises four key components:
 
 ### Shift Detection Function
-  - **Functionality**: Uses statistical methods to detect shifts in the distribution of network traffic data.
+  - **Purpose**: Detects distribution shifts in network traffic using statistical methods.
   
 ### Sample Selection
   - **Subset Selection**: Identifies a representative subset of the network traffic samples that reflects the overall distribution after a shift.
@@ -19,18 +19,18 @@ Mateen is an ensemble framework designed to enhance AutoEncoder (AE)-based one-c
   - **Temporary Model Training**: Initiates a new temporary model with the same weights as the incremental model. Then, train this model exclusively on the benign data of the labeled subset.
     
 ### Complexity Reduction Module
-  - **Model Merging**: Combines temporary models with similar performance.
-  - **Model Pruning**: Discards underperforming models.
+  - **Model Merging**: Merges temporary models that perform similarly.
+  - **Model Pruning**: Removes models that underperform compared to the best-performing model.
 
 For further details, please refer to the main paper.
 
 # Pre-requisites and requirements
-Before running Mateen, ensure you have the necessary dependencies installed. These dependencies are listed in the '<b>requirements.txt</b>' file. You can install them using the following command:
+Ensure the following dependencies are installed before running Mateen. You can install them using the command below:
 ```bash
 pip install -r requirements.txt
 ```
 
-Here is the content of '<b>requirements.txt</b>':
+Contents of '<b>requirements.txt</b>':
 ```
 torch==2.0.1
 numpy==1.25.0
@@ -48,10 +48,10 @@ You can download the pre-trained models, the processed data, as well as the resu
 The contents of the folder are as follows: 
 - `Datasets.zip`: Contains the processed data.
 - `Models.zip`: Contains the pre-trained models.
-- `Results.zip`: Contains prediction results and probability scores from the Mateen framework across the datasets
+- `Results.zip`: Prediction results and probabilities across datasets.
 
-Download and extract these files into the main directory of Mateen (i.e., `Mateen/`). This will ensure that the data and models are properly organized and ready for use.
- 
+Ensure these files are placed in the `Mateen/` directory after downloading and extracting.
+
 # How to Use Mateen
 
 To utilize Mateen with our settings, please follow these steps to set up the required datasets and run the framework.
@@ -136,32 +136,59 @@ python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres
    0.005, 0.01, 0.05, and 0.1
 </details>
 
-### Detection Method
-Choose the detection method using the '<b>--Detection_Method</b>' option.
+### Mini Batch Size for Sample Selection
+Choose the min-batch size using the '<b>--mini_batch_size</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "CICIDS2017" --acceptance_err 0.07 --train_mode "pre-train" --Mode "Detection" --Detection_Method "Rasd"
+python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000
 ```
 <details>
     <summary>Options</summary>
-    "Rasd", "LSL", and "CADE"
+    500, 1000, and 1500
 </details>
 
 
 
-### Selection Batch Size
-Set the batch size for splitting the pool of detected samples using the '<b>--selection_batch_size</b>' option.
+### Retention Rate
+Set the value of the retention rate using '<b>--retention_rate</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "CICIDS2017" --acceptance_err 0.07 --train_mode "pre-train" --Mode "Detection" --Detection_Method "Rasd" --selection_rate 0.05 --selection_batch_size 3000
+python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3
+```
+<details>
+    <summary>Options</summary>
+    0.3, 0.5, and 0.9
+</details>
+
+### Lambda 0 value
+Set the value of the lambda 0 using '<b>--lambda_0</b>' option.
+
+Example:
+```bash
+python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3 --lambda_0 0.1
+```
+<details>
+    <summary>Options</summary>
+    0.1, 0.5, and 1.0
+</details>
+
+### Shift Detection Threshold
+Set the threshold using '<b>--shift_threshold</b>' option.
+
+Example:
+```bash
+python Main.py  --dataset_name "IDS2017" --window_size 50000 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3 --lambda_0 0.1 --shift_threshold 0.05
 ```
 
 <details>
     <summary>Options</summary>
-    3000, 2000, and 1000
+    0.05, 0.1, and 0.2
 </details>
+
+# Hyperparameter Selection
+For further customization options and detailed hyperparameter selection, please refer to the main paper, Appendix C.
 
 # Citation
 ```
