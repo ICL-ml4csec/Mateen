@@ -81,7 +81,7 @@ Switch between datasets using the '<b>--dataset_name</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "IDS2017"
+python Mateen.py --dataset_name "IDS2017"
 ```
 <details>
   <summary>Options</summary>
@@ -93,7 +93,7 @@ Set the window size using the '<b>--window_size</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "IDS2017" --window_size 50000
+python Mateen.py --dataset_name "IDS2017" --window_size 50000
 ```
 <details>
 <summary>Options</summary>
@@ -105,7 +105,7 @@ Set the threshold using '<b>--shift_threshold</b>' option.
 
 Example:
 ```bash
-python Main.py  --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05
+python Mateen.py  --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05
 ```
 
 <details>
@@ -118,7 +118,7 @@ The minimum acceptable performance '<b>--performance_thres</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99
+python Mateen.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99
 ```
 <details>
   <summary>Options</summary>
@@ -130,7 +130,7 @@ The maximum acceptable ensemble size '<b>--max_ensemble_length</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3
+python Mateen.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3
 ```
 <details>
     <summary>Options</summary>
@@ -142,7 +142,7 @@ Set the selection rate for building a subset for manual labeling using the '<b>-
 
 Example:
 ```bash
-python Main.py  --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01
+python Mateen.py  --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01
 ```
 <details>
     <summary>Options</summary>
@@ -154,7 +154,7 @@ Choose the min-batch size using the '<b>--mini_batch_size</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000
+python Mateen.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000
 ```
 <details>
     <summary>Options</summary>
@@ -167,7 +167,7 @@ Set the value of the retention rate using '<b>--retention_rate</b>' option.
 
 Example:
 ```bash
-python Main.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3
+python Mateen.py --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3
 ```
 <details>
     <summary>Options</summary>
@@ -179,7 +179,7 @@ Adjust the lambda_0 parameter with the '<b>--lambda_0'</b> option to adjust the 
 
 Example:
 ```bash
-python Main.py  --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3 --lambda_0 0.1
+python Mateen.py  --dataset_name "IDS2017" --window_size 50000 --shift_threshold 0.05 --performance_thres 0.99 --max_ensemble_length 3 --selection_budget 0.01 --mini_batch_size 1000 --retention_rate 0.3 --lambda_0 0.1
 ```
 <details>
     <summary>Options</summary>
